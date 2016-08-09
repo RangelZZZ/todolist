@@ -1,0 +1,80 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.title {
+    margin-top: 70px;
+
+}
+
+.title h1 {
+    width: 100%;
+    font-size: 100px;
+    font-weight: 100;
+    margin-left: 40px;
+    color: rgba(175, 47, 47, 0.15);
+}
+.inputBox input {
+    margin-top: 20px;
+    height: 70px;
+    width: 500px;
+    padding: 16px 16px 16px 60px;
+    font-size: 30px;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #d1d0d0;
+    font-size: 30px;
+    font-style: italic;
+    text-align: center;
+}
+
+.todos{
+    height: 50px;
+    line-height: 50px;
+    border: 1px solid #d1d0d0;
+    border-top: none;
+    width:500px;
+    margin:0 auto;
+}
+
+.todos input {
+    float:left;
+    width: 40px;
+    height: 40px;
+    margin-left: 20px;
+    border-radius:50%;
+}
+
+.todo{
+    font-size:30px;
+    padding-left:20px;
+    font-style:normal;
+}
+.remove{
+    float:right;
+    margin-right: 10px;
+    margin-top: 10px;
+    color:brown;
+    font-size: 30px;
+}
+
+.footer {
+    height: 50px;
+    line-height: 50px;
+    border: 1px solid #d1d0d0;
+    border-top: none;
+    width: 500px;
+    margin: 0 auto;
+}
+
+.all,.active,.completed,.left{
+    float:left;
+    border: none;
+    padding-left: 50px;
+    background-color: transparent;
+    outline: none;
+}
+
+

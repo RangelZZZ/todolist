@@ -10,6 +10,14 @@ const App = React.createClass({
         }
     },
 
+    componentDidMount: function () {
+        $.get('/', function (result) {
+
+            this.state.todolist = result;
+            this.state.temp = result;
+        })
+    },
+
     addEvent: function (event) {
         const task = this.refs.addTask;
 
@@ -27,7 +35,7 @@ const App = React.createClass({
             value: task.value
         };
         todolist.push(todo);
-        this.setState({temp:todolist});
+        this.setState({temp: todolist});
     },
 
     deleteEvent: function (index) {
@@ -50,11 +58,11 @@ const App = React.createClass({
         this.setState({temp});
     },
 
-    all:function () {
-      this.setState({temp:this.state.todolist});
+    all: function () {
+        this.setState({temp: this.state.todolist});
     },
 
-    active:function () {
+    active: function () {
         let temp = this.state.todolist;
         temp = temp.filter(todo => !todo.completed);
         this.setState({temp});
@@ -62,13 +70,16 @@ const App = React.createClass({
 
     render: function () {
 
-        return <div>
+        return <div className="center-block">
             <Header/>
-            <div>
-                <input type="text" ref="addTask" placeholder="what needs to be done" onKeyPress={this.addEvent}/>
+            <div className="inputBox text-center">
+                <label>
+                    <input type="text" ref="addTask" placeholder="what needs to be done" onKeyPress={this.addEvent}/>
+                </label>
             </div>
             <TodoList temp={this.state.temp} onDelete={this.deleteEvent} onChange={this.changeState}/>
-            <Footer onCompleted={this.completed}  onAll={this.all} onActive={this.active} elements={this.state.todolist}/>
+            <Footer className="text-center" onCompleted={this.completed} onAll={this.all} onActive={this.active}
+                    elements={this.state.todolist}/>
         </div>
     }
 });
@@ -76,7 +87,7 @@ const App = React.createClass({
 const Header = React.createClass({
 
     render: function () {
-        return <div>
+        return <div className="title text-center">
             <h1>todolist</h1>
         </div>
     }
@@ -93,11 +104,12 @@ const TodoList = React.createClass({
 
     render: function () {
         const items = this.props.temp.map((element, index)=> {
-            return <div key={index}>
+            return <div key={index} className="todos">
                 <input type="checkbox" checked={element.completed}
-                       onClick={this.change.bind(this, index)}/>{element.value}
-
-                <button onClick={this.delete.bind(this, index)}>-</button>
+                       onClick={this.change.bind(this, index)}/>
+                <span className="todo">{element.value}</span>
+                <span className="glyphicon glyphicon-remove delete remove"
+                      onClick={this.delete.bind(this, index)}></span>
             </div>
         });
 
@@ -110,12 +122,12 @@ const TodoList = React.createClass({
 const Footer = React.createClass({
 
     render: function () {
-        const element = this.props.elements.map(element => (element.completed ? 0:1)).reduce((a,b) =>  (a + b ),0);
-        return <div>
-            <button>{element} items left</button>
-            <button onClick={this.props.onAll}>all</button>
-            <button onClick={this.props.onCompleted}>Completed</button>
-            <button onClick={this.props.onActive}>active</button>
+        const element = this.props.elements.map(element => (element.completed ? 0 : 1)).reduce((a, b) => (a + b ), 0);
+        return <div className="text-center footer" >
+            <button className="left">{element} items left</button>
+            <button className="all" onClick={this.props.onAll}>all</button>
+            <button className="completed" onClick={this.props.onCompleted}>Completed</button>
+            <button className="active" onClick={this.props.onActive}>active</button>
         </div>
     }
 });
